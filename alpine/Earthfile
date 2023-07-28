@@ -1,0 +1,16 @@
+VERSION 0.7
+
+build:
+    DO ../.base/image+ALPINE
+    DO ../.base+LABEL
+    DO ../.base/os/alpine+UPGRADE
+    DO ../.base/os/alpine+COMMON_PKG
+
+    CMD ["/bin/bash"]
+
+    # SAVE IMAGE --push cuilan/alpine:latest
+    SAVE IMAGE cuilan/alpine:latest
+
+all:
+    BUILD --platform=linux/amd64 +build
+    # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build

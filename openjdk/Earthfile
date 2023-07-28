@@ -1,0 +1,178 @@
+VERSION 0.7
+
+DO ../.base+BUILD_DATE
+
+OPENJDK:
+    COMMAND
+    DO ../.base+LABEL
+    DO ../.base/os/debian+UPGRADE
+    DO ../.base/os/debian+COMMON_PKG
+    DO ../.base/os/debian+LOCALE
+    DO ../.base/os/debian+TIMEZONE
+    DO ../.base+TINI
+
+    ENTRYPOINT ["tini","--"]
+
+    CMD ["bash"]
+
+JAVA_BUILD:
+    COMMAND
+    ENV MAVEN_CACHE_DIR /data/maven_cache
+    ENV MAVEN_INSTALL_DIR /usr/local/maven
+    ENV GRADLE_CACHE_DIR /data/gradle_cache
+    ENV GRADLE_INSTALL_DIR /usr/local/gradle
+
+    ENV PATH ${PATH}:${MAVEN_INSTALL_DIR}/bin:${GRADLE_INSTALL_DIR}/bin
+
+    RUN set -e \
+        && export MAVEN_VERSION=$(curl -s https://api.github.com/repos/apache/maven/releases/latest | jq -r '.name') \
+        && export MAVEN_DOWNLOAD_URL=https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+        && export GRADLE_VERSION=$(curl -s https://api.github.com/repos/gradle/gradle/releases/latest | jq -r '.name') \
+        && export GRADLE_DOWNLOAD_URL=https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip \
+        && curl -sSL ${MAVEN_DOWNLOAD_URL} > apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+        && tar -zxf apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+        && mv apache-maven-${MAVEN_VERSION} ${MAVEN_INSTALL_DIR} \
+        && curl -sSL ${GRADLE_DOWNLOAD_URL} > gradle-${GRADLE_VERSION}-bin.zip \
+        && unzip -q gradle-${GRADLE_VERSION}-bin.zip \
+        && mv gradle-${GRADLE_VERSION} ${GRADLE_INSTALL_DIR} \
+        && apt purge -y unzip \
+        && rm -rf /var/lib/apt/lists/* \
+            apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+            gradle-${GRADLE_VERSION}-bin.zip
+
+    COPY cmvn /usr/local/bin/cmvn
+    COPY cgradle /usr/local/bin/cgradle
+    
+    VOLUME ${MAVEN_CACHE_DIR}
+    VOLUME ${GRADLE_CACHE_DIR}
+    
+    CMD ["bash"]
+
+##################### runtime ######################
+
+build-openjdk8:
+    DO ../.base/image+JDK8
+    DO +OPENJDK
+    DO ../.base/language/java+JAVA_OPTS
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/openjdk8:latest cuilan/openjdk8:hotspot cuilan/openjdk8:hotspot-${BUILD_DATE}
+
+build-openjdk8-openj9:
+    DO ../.base/image+JDK8_OPENJ9
+    DO +OPENJDK
+
+    SAVE IMAGE --push cuilan/openjdk8:openj9 cuilan/openjdk8:openj9-${BUILD_DATE}
+
+build-openjdk11:
+    DO ../.base/image+JDK11
+    DO +OPENJDK
+    DO ../.base/language/java+JAVA_OPTS_11
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/openjdk11:latest cuilan/openjdk11:hotspot cuilan/openjdk11:hotspot-${BUILD_DATE}
+
+build-openjdk11-openj9:
+    DO ../.base/image+JDK11_OPENJ9
+    DO +OPENJDK
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/openjdk11:openj9 cuilan/openjdk11:openj9-${BUILD_DATE}
+
+build-openjdk17:
+    DO ../.base/image+JDK17
+    DO +OPENJDK
+    DO ../.base/language/java+JAVA_OPTS_17
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/openjdk17:latest cuilan/openjdk17:hotspot cuilan/openjdk17:hotspot-${BUILD_DATE}
+
+build-openjdk17-openj9:
+    DO ../.base/image+JDK17_OPENJ9
+    DO +OPENJDK
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/openjdk17:openj9 cuilan/openjdk17:openj9-${BUILD_DATE}
+
+##################### build ######################
+
+build-openjdk8-javabuild:
+    DO ../.base/image+JDK8
+    DO +OPENJDK
+    DO ../.base/language/java+JAVA_OPTS
+    DO +JAVA_BUILD
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/javabuild8:latest cuilan/javabuild8:hotspot cuilan/javabuild8:hotspot-${BUILD_DATE}
+
+build-openjdk8-openj9-javabuild:
+    DO ../.base/image+JDK8_OPENJ9
+    DO +OPENJDK
+    DO +JAVA_BUILD
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/javabuild8:openj9 cuilan/javabuild8:openj9-${BUILD_DATE}
+
+build-openjdk11-javabuild:
+    DO ../.base/image+JDK11
+    DO +OPENJDK
+    DO ../.base/language/java+JAVA_OPTS_11
+    DO +JAVA_BUILD
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/javabuild11:latest cuilan/javabuild11:hotspot cuilan/javabuild11:hotspot-${BUILD_DATE}
+
+build-openjdk11-openj9-javabuild:
+    DO ../.base/image+JDK11_OPENJ9
+    DO +OPENJDK
+    DO +JAVA_BUILD
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/javabuild11:openj9 cuilan/javabuild11:openj9-${BUILD_DATE}
+
+build-openjdk17-javabuild:
+    DO ../.base/image+JDK17
+    DO +OPENJDK
+    DO ../.base/language/java+JAVA_OPTS_17
+    DO +JAVA_BUILD
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/javabuild17:latest cuilan/javabuild17:hotspot cuilan/javabuild17:hotspot-${BUILD_DATE}
+
+build-openjdk17-openj9-javabuild:
+    DO ../.base/image+JDK17_OPENJ9
+    DO +OPENJDK
+    DO +JAVA_BUILD
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/javabuild17:openj9 cuilan/javabuild17:openj9-${BUILD_DATE}
+
+all:
+    #DO ../.base+BUILD_DATE
+    FROM cuilan/alpine
+
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+
+    BUILD --platform=linux/amd64 +build-openjdk8 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk8-openj9 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk11 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk11-openj9 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk17 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk17-openj9 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk8-javabuild --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk8-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk11-javabuild --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk11-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk17-javabuild --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk17-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
