@@ -1,0 +1,16 @@
+VERSION 0.7
+
+build:
+    DO ../udcs/image+CENTOS7
+    DO ../udcs+LABEL
+    DO ../udcs/os/centos+UPGRADE
+    DO ../udcs/os/centos+TIMEZONE
+    DO ../udcs/os/centos+REMOVE_UNUSED_PKG
+    DO ../udcs/os/centos+COMMON_PKG
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE cuilan/centos7:latest
+
+all:
+    BUILD --platform=linux/amd64 +build

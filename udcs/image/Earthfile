@@ -4,6 +4,10 @@ ALPINE:
     COMMAND
     FROM alpine
 
+CENTOS7:
+    COMMAND
+    FROM centos:centos7
+
 DEBIAN:
     COMMAND
     FROM debian
