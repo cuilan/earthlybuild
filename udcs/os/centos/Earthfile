@@ -26,7 +26,6 @@ UPGRADE:
             -i /etc/yum.repos.d/epel*.repo \
         && yum clean all \
         && rm -rf /var/cache/yum /var/tmp/yum-*
-        
 
 REMOVE_UNUSED_PKG:
     COMMAND
