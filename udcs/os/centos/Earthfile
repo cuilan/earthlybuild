@@ -38,7 +38,7 @@ REMOVE_UNUSED_PKG:
 
 COMMON_PKG:
     COMMAND
-    RUN && yum makecache \
+    RUN yum makecache \
         && yum groupinstall  "Development Tools" -y \
         && yum -y install htop pstree cmake mesa-libGL.x86_64 net-tools.x86_64 git wget screen iotop vim \
             lrzsz tree lsof sysstat net-tools ntp gcc gcc-c++ make libtool autoconf patch unzip automake \
