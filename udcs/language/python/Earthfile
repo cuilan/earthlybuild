@@ -1,0 +1,16 @@
+VERSION 0.7
+
+INSTALL_PYTHON3815:
+    COMMAND
+    RUN set -ex \
+        && wget -q https://www.python.org/ftp/python/3.8.15/Python-3.8.15.tgz \
+        && (tar zxf Python-3.8.15.tgz && cd Python-3.8.15 && ./configure --prefix=/data/server/python && make -j4 && make install) \
+        && ln -s /data/server/python/bin/python3.8 /data/server/python/bin/python \
+        && ln -s /data/server/python/bin/pip3.8 /data/server/python/bin/pip \
+        && echo 'export PATH=/data/server/python/bin:$PATH' >> /root/.bashrc \
+        && rm -rf Python-3.8.15.tgz Python-3.8.15
+
+PIP_PROXY:
+    COMMAND
+    RUN mkdir /root/.pip \
+        && echo -e '[global]\ntrusted-host = pypi.doubanio.com\nindex-url = http://pypi.doubanio.com/simple/' >> /root/.pip/pip.conf
