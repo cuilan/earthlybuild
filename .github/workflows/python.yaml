@@ -1,0 +1,21 @@
+name: cuilan/centos
+
+on:
+  schedule:
+    - cron: 0 2 * * 1
+  workflow_call:
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: Manually trigger
+        required: true
+        type: choice
+        options:
+          - build
+
+jobs:
+  alpine:
+    uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
+    with:
+      build-dir: python

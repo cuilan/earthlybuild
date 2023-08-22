@@ -18,8 +18,7 @@ build-python38:
 
     ARG --required BUILD_DATE
 
-    # SAVE IMAGE --push cuilan/python38-centos7 cuilan/python38-centos7-${BUILD_DATE}
-    SAVE IMAGE cuilan/python38-centos7
+    SAVE IMAGE --push cuilan/python:38-centos7 cuilan/python:38-centos7-${BUILD_DATE}
 
 all:
     FROM cuilan/alpine
