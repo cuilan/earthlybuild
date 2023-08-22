@@ -10,7 +10,7 @@ build:
 
     CMD ["/bin/bash"]
 
-    SAVE IMAGE cuilan/centos7:latest
+    SAVE IMAGE --push cuilan/centos7:latest
 
 all:
     BUILD --platform=linux/amd64 +build

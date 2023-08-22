@@ -8,8 +8,8 @@ build:
 
     CMD ["/bin/bash"]
 
-    # SAVE IMAGE --push cuilan/alpine:latest
-    SAVE IMAGE cuilan/alpine:latest
+    SAVE IMAGE --push cuilan/alpine:latest
+    # SAVE IMAGE cuilan/alpine:latest
 
 all:
     BUILD --platform=linux/amd64 +build
