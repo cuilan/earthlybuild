@@ -1,4 +1,4 @@
-name: cuilan/centos
+name: cuilan/python
 
 on:
   schedule:
