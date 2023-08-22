@@ -12,3 +12,8 @@ use earthly build docker images.
 
 [cuilan/python](https://hub.docker.com/r/cuilan/python)
 ![cuilan/python](https://github.com/cuilan/earthlybuild/actions/workflows/python.yaml/badge.svg)
+
+
+## License
+
+This project is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
