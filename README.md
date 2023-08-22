@@ -2,8 +2,6 @@
 
 use earthly build docker images.
 
----
-
 ## Images
 
 [cuilan/alpine](https://hub.docker.com/r/cuilan/alpine)
