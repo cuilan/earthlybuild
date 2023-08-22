@@ -1,7 +1,7 @@
 VERSION 0.7
 
 build-python38:
-    FROM cuilan/centos7
+    FROM cuilan/centos7:latest
     
     DO ../udcs/language/python+INSTALL_PYTHON3815
     DO ../udcs/language/python+PIP_PROXY
