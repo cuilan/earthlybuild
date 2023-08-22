@@ -14,7 +14,7 @@ on:
           - build
 
 jobs:
-  alpine:
+  centos:
     uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
     with:

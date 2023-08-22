@@ -1,22 +1,14 @@
 VERSION 0.7
 
-PYTHON:
-    COMMAND
-    DO ../udcs/image+CENTOS7
-    DO ../udcs+LABEL
-    DO ../udcs/os/centos+UPGRADE
-    DO ../udcs/os/centos+TIMEZONE
-    DO ../udcs/os/centos+REMOVE_UNUSED_PKG
-    DO ../udcs/os/centos+COMMON_PKG
-
-    CMD ["/bin/bash"]
-
 build-python38:
-    DO +PYTHON
+    FROM cuilan/centos7
+    
     DO ../udcs/language/python+INSTALL_PYTHON3815
     DO ../udcs/language/python+PIP_PROXY
 
     ARG --required BUILD_DATE
+
+    CMD ["/bin/bash"]
 
     SAVE IMAGE --push cuilan/python:38-centos7 cuilan/python:38-centos7-${BUILD_DATE}
 
