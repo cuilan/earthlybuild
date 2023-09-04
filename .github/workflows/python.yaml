@@ -1,8 +1,8 @@
 name: cuilan/python
 
 on:
-  schedule:
-    - cron: 0 2 * * 1
+  #schedule:
+    #- cron: 0 2 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:
