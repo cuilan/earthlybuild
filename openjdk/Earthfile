@@ -165,14 +165,14 @@ all:
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 
     BUILD --platform=linux/amd64 +build-openjdk8 --BUILD_DATE=${BUILD_DATE}
-    BUILD --platform=linux/amd64 +build-openjdk8-openj9 --BUILD_DATE=${BUILD_DATE}
-    BUILD --platform=linux/amd64 +build-openjdk11 --BUILD_DATE=${BUILD_DATE}
-    BUILD --platform=linux/amd64 +build-openjdk11-openj9 --BUILD_DATE=${BUILD_DATE}
-    BUILD --platform=linux/amd64 +build-openjdk17 --BUILD_DATE=${BUILD_DATE}
-    BUILD --platform=linux/amd64 +build-openjdk17-openj9 --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjdk8-openj9 --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjdk11 --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjdk11-openj9 --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjdk17 --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjdk17-openj9 --BUILD_DATE=${BUILD_DATE}
     BUILD --platform=linux/amd64 +build-openjdk8-javabuild --BUILD_DATE=${BUILD_DATE}
-    BUILD --platform=linux/amd64 +build-openjdk8-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
-    BUILD --platform=linux/amd64 +build-openjdk11-javabuild --BUILD_DATE=${BUILD_DATE}
-    BUILD --platform=linux/amd64 +build-openjdk11-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
-    BUILD --platform=linux/amd64 +build-openjdk17-javabuild --BUILD_DATE=${BUILD_DATE}
-    BUILD --platform=linux/amd64 +build-openjdk17-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjdk8-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjdk11-javabuild --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjdk11-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjdk17-javabuild --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjdk17-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
