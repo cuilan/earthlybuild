@@ -10,6 +10,9 @@ use earthly build docker images.
 [cuilan/centos](https://hub.docker.com/r/cuilan/centos7)
 ![cuilan/centos7](https://github.com/cuilan/earthlybuild/actions/workflows/centos.yaml/badge.svg)
 
+[cuilan/openjdk](https://hub.docker.com/r/cuilan/openjdk)
+![cuilan/python](https://github.com/cuilan/earthlybuild/actions/workflows/openjdk.yaml/badge.svg)
+
 [cuilan/python](https://hub.docker.com/r/cuilan/python)
 ![cuilan/python](https://github.com/cuilan/earthlybuild/actions/workflows/python.yaml/badge.svg)
 
