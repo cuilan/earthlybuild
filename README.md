@@ -16,6 +16,8 @@ use earthly build docker images.
 [cuilan/python](https://hub.docker.com/r/cuilan/python)
 ![cuilan/python](https://github.com/cuilan/earthlybuild/actions/workflows/python.yaml/badge.svg)
 
+[cuilan/golang](https://hub.docker.com/r/cuilan/golang)
+![cuilan/golang](https://github.com/cuilan/earthlybuild/actions/workflows/golang.yaml/badge.svg)
 
 ## License
 

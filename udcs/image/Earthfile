@@ -4,9 +4,13 @@ ALPINE:
     COMMAND
     FROM alpine
 
+# -------------------------------------
+
 CENTOS7:
     COMMAND
     FROM centos:centos7
+
+# -------------------------------------
 
 DEBIAN:
     COMMAND
@@ -16,25 +20,31 @@ DEBIAN_SLIM:
     COMMAND
     FROM debian:stable-slim
 
+# -------------------------------------
+
 UBUNTU:
     COMMAND
     FROM ubuntu
 
-GOLANG:
-    COMMAND
-    FROM golang:1-alpine
+# -------------------------------------
 
-GOLANG_DEBIAN:
+GOLANG1_21:
     COMMAND
-    FROM golang:1
+    FROM golang:1.21-alpine3.18
+
+GOLANG1_21_DEBIAN:
+    COMMAND
+    FROM golang:1.21.4-bullseye
 
 GO:
     COMMAND
-    DO +GOLANG
+    DO +GOLANG1_21
 
 GO_DEBIAN:
     COMMAND
-    DO +GOLANG_DEBIAN
+    DO +GOLANG1_21_DEBIAN
+
+# -------------------------------------
 
 RUST:
     COMMAND
@@ -43,6 +53,8 @@ RUST:
 RUST_DEFIAN:
     COMMAND
     FROM rust
+
+# -------------------------------------
 
 JDK8:
     COMMAND
@@ -68,13 +80,19 @@ JDK17_OPENJ9:
     COMMAND
     FROM ibm-semeru-runtimes:open-17-jdk
 
+# -------------------------------------
+
 NODE:
     COMMAND
     FROM node:lts-buster
 
+# -------------------------------------
+
 NGINX:
     COMMAND
     FROM nginx:alpine
+
+# -------------------------------------
 
 CONFLUENCE:
     COMMAND
