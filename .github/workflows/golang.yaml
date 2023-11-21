@@ -1,4 +1,4 @@
-name: cuilan/go
+name: cuilan/golang
 
 on:
   #schedule:
