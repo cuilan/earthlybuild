@@ -16,6 +16,10 @@ COMMON_PKG:
     COMMAND
     RUN apk add bash tzdata bind-tools busybox-extras ca-certificates libc6-compat vim wget curl jq git --no-cache
 
+SSH_PKG:
+    COMMAND
+    RUN apk add openssh-client --no-cache
+
 INSTALL_BUILD_BASE:
     COMMAND
     RUN apk add --virtual build-dependencies alpine-sdk --no-cache
