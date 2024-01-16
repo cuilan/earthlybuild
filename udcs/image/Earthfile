@@ -36,6 +36,10 @@ GOLANG1_21_DEBIAN:
     COMMAND
     FROM golang:1.21.4-bullseye
 
+GOLANG1_21_3:
+    COMMAND
+    FROM golang:1.21.3-alpine
+
 GO:
     COMMAND
     DO +GOLANG1_21

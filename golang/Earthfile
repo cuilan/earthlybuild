@@ -18,9 +18,17 @@ build-golang1.21-alpine:
 
     SAVE IMAGE --push cuilan/golang:latest cuilan/golang:1.21-alpine cuilan/golang:1.21-alpine-${BUILD_DATE}
 
+build-golang1.21.3-alpine:
+    DO ../udcs/image+GOLANG1_21_3
+    DO +GOLANG
+
+    ARG --required BUILD_DATE
+    SAVE IMAGE --push cuilan/golang:1.21.3-alpine cuilan/golang:1.21.3-alpine-${BUILD_DATE}
+
 all:
     FROM cuilan/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 
     BUILD --platform=linux/amd64 +build-golang1.21-alpine --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-golang1.21.3-alpine --BUILD_DATE=${BUILD_DATE}
