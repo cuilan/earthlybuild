@@ -11,18 +11,20 @@ GOLANG:
     CMD ["/bin/sh"]
 
 build-golang1.21-alpine:
-    DO ../udcs/os/alpine+COMMON_PKG
     DO ../udcs/image+GOLANG1_21
     DO +GOLANG
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
 
     ARG --required BUILD_DATE
 
     SAVE IMAGE --push cuilan/golang:latest cuilan/golang:1.21-alpine cuilan/golang:1.21-alpine-${BUILD_DATE}
 
 build-golang1.21.3-alpine:
-    DO ../udcs/os/alpine+COMMON_PKG
     DO ../udcs/image+GOLANG1_21_3
     DO +GOLANG
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
 
     ARG --required BUILD_DATE
     SAVE IMAGE --push cuilan/golang:1.21.3-alpine cuilan/golang:1.21.3-alpine-${BUILD_DATE}
