@@ -8,7 +8,7 @@ GOLANG:
     DO ../udcs/language/go+GOPROXY
     DO ../udcs/language/go+FIX_DNS
 
-    CMD ["/bin/sh"]
+    CMD ["bash"]
 
 build-golang1.21-alpine:
     DO ../udcs/image+GOLANG1_21
