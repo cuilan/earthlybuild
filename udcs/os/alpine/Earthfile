@@ -12,6 +12,10 @@ UPGRADE:
     COMMAND
     RUN apk upgrade --no-cache
 
+UPGRADE_ALIYUN:
+    COMMAND
+    RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk upgrade --no-cache
+
 COMMON_PKG:
     COMMAND
     RUN apk add bash tzdata bind-tools busybox-extras ca-certificates libc6-compat vim wget curl jq git --no-cache

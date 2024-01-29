@@ -4,6 +4,14 @@ ALPINE:
     COMMAND
     FROM alpine
 
+ALPINE3_19:
+    COMMAND
+    FROM alpine:3.19
+
+ALPINE3_18:
+    COMMAND
+    FROM alpine:3.18
+
 # -------------------------------------
 
 CENTOS7:
