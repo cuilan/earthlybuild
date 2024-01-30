@@ -48,8 +48,9 @@ JAVA_BUILD:
     
     CMD ["bash"]
 
-##################### runtime ######################
+############################# runtime ##############################
 
+#--------------------------- openjdk8 ------------------------------
 build-openjdk8:
     DO ../udcs/image+JDK8
     DO +OPENJDK
@@ -59,12 +60,31 @@ build-openjdk8:
 
     SAVE IMAGE --push cuilan/openjdk8:latest cuilan/openjdk8:hotspot cuilan/openjdk8:hotspot-${BUILD_DATE}
 
+#--------------------------- openjre8 ------------------------------
+build-openjre8:
+    DO ../udcs/image+JRE8
+    DO +OPENJDK
+    DO ../udcs/language/java+JAVA_OPTS
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/openjre8:latest cuilan/openjre8:hotspot cuilan/openjre8:hotspot-${BUILD_DATE}
+
+#------------------------ openjdk8-openj9 --------------------------
 build-openjdk8-openj9:
     DO ../udcs/image+JDK8_OPENJ9
     DO +OPENJDK
 
     SAVE IMAGE --push cuilan/openjdk8:openj9 cuilan/openjdk8:openj9-${BUILD_DATE}
 
+#------------------------ openjre8-openj9 --------------------------
+build-openjre8-openj9:
+    DO ../udcs/image+JRE8_OPENJ9
+    DO +OPENJDK
+
+    SAVE IMAGE --push cuilan/openjre8:openj9 cuilan/openjre8:openj9-${BUILD_DATE}
+
+#--------------------------- openjdk11 ------------------------------
 build-openjdk11:
     DO ../udcs/image+JDK11
     DO +OPENJDK
@@ -74,6 +94,17 @@ build-openjdk11:
 
     SAVE IMAGE --push cuilan/openjdk11:latest cuilan/openjdk11:hotspot cuilan/openjdk11:hotspot-${BUILD_DATE}
 
+#--------------------------- openjre11 ------------------------------
+build-openjre11:
+    DO ../udcs/image+JRE11
+    DO +OPENJDK
+    DO ../udcs/language/java+JAVA_OPTS_11
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/openjre11:latest cuilan/openjre11:hotspot cuilan/openjre11:hotspot-${BUILD_DATE}
+
+#------------------------ openjdk11-openj9 ---------------------------
 build-openjdk11-openj9:
     DO ../udcs/image+JDK11_OPENJ9
     DO +OPENJDK
@@ -82,6 +113,16 @@ build-openjdk11-openj9:
 
     SAVE IMAGE --push cuilan/openjdk11:openj9 cuilan/openjdk11:openj9-${BUILD_DATE}
 
+#------------------------ openjre11-openj9 ---------------------------
+build-openjre11-openj9:
+    DO ../udcs/image+JRE11_OPENJ9
+    DO +OPENJDK
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/openjre11:openj9 cuilan/openjre11:openj9-${BUILD_DATE}
+
+#--------------------------- openjdk17 ------------------------------
 build-openjdk17:
     DO ../udcs/image+JDK17
     DO +OPENJDK
@@ -91,6 +132,17 @@ build-openjdk17:
 
     SAVE IMAGE --push cuilan/openjdk17:latest cuilan/openjdk17:hotspot cuilan/openjdk17:hotspot-${BUILD_DATE}
 
+#--------------------------- openjre17 ------------------------------
+build-openjre17:
+    DO ../udcs/image+JRE17
+    DO +OPENJDK
+    DO ../udcs/language/java+JAVA_OPTS_17
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/openjre17:latest cuilan/openjre17:hotspot cuilan/openjre17:hotspot-${BUILD_DATE}
+
+#------------------------ openjdk17-openj9 ---------------------------
 build-openjdk17-openj9:
     DO ../udcs/image+JDK17_OPENJ9
     DO +OPENJDK
@@ -99,7 +151,16 @@ build-openjdk17-openj9:
 
     SAVE IMAGE --push cuilan/openjdk17:openj9 cuilan/openjdk17:openj9-${BUILD_DATE}
 
-##################### build ######################
+#------------------------ openjre17-openj9 ---------------------------
+build-openjre17-openj9:
+    DO ../udcs/image+JRE17_OPENJ9
+    DO +OPENJDK
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/openjre17:openj9 cuilan/openjre17:openj9-${BUILD_DATE}
+
+############################# build ##############################
 
 build-openjdk8-javabuild:
     DO ../udcs/image+JDK8
@@ -165,11 +226,18 @@ all:
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 
     BUILD --platform=linux/amd64 +build-openjdk8 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjre8 --BUILD_DATE=${BUILD_DATE}
     # BUILD --platform=linux/amd64 +build-openjdk8-openj9 --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjre8-openj9 --BUILD_DATE=${BUILD_DATE}
     # BUILD --platform=linux/amd64 +build-openjdk11 --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjre11 --BUILD_DATE=${BUILD_DATE}
     # BUILD --platform=linux/amd64 +build-openjdk11-openj9 --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjre11-openj9 --BUILD_DATE=${BUILD_DATE}
     BUILD --platform=linux/amd64 +build-openjdk17 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjre17 --BUILD_DATE=${BUILD_DATE}
     # BUILD --platform=linux/amd64 +build-openjdk17-openj9 --BUILD_DATE=${BUILD_DATE}
+    # BUILD --platform=linux/amd64 +build-openjre17-openj9 --BUILD_DATE=${BUILD_DATE}
+
     BUILD --platform=linux/amd64 +build-openjdk8-javabuild --BUILD_DATE=${BUILD_DATE}
     # BUILD --platform=linux/amd64 +build-openjdk8-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
     # BUILD --platform=linux/amd64 +build-openjdk11-javabuild --BUILD_DATE=${BUILD_DATE}
