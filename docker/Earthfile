@@ -1,0 +1,87 @@
+VERSION 0.7
+
+DOCKER_ALPINE_PKG:
+    COMMAND
+    ENV TZ Asia/Shanghai
+    
+    RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+        && apk upgrade --no-cache \
+        && apk add tzdata \
+        && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
+        && echo ${TZ} > /etc/timezone \
+        && apk add bash bind-tools busybox-extras ca-certificates libc6-compat vim wget curl jq git --no-cache
+
+#--------------------------- docker cli ------------------------------
+
+build-docker-cli-19:
+    DO ../udcs/image+DOCKER_CLI_19
+    DO ../udcs+LABEL
+    DO +DOCKER_ALPINE_PKG
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE --push cuilan/docker-cli:19.03.15-alpine3.13 cuilan/docker-cli:19.03.15 cuilan/docker-cli:19.03 cuilan/docker-cli:19
+
+build-docker-cli-24:
+    DO ../udcs/image+DOCKER_CLI_24
+    DO ../udcs+LABEL
+    DO +DOCKER_ALPINE_PKG
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE --push cuilan/docker-cli:24.0.8-alpine3.19 cuilan/docker-cli:24.0.8 cuilan/docker-cli:24.0 cuilan/docker-cli:24
+
+build-docker-cli-25:
+    DO ../udcs/image+DOCKER_CLI_25
+    DO ../udcs+LABEL
+    DO +DOCKER_ALPINE_PKG
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE --push cuilan/docker-cli:25.0.1-alpine3.19 cuilan/docker-cli:25.0.1 cuilan/docker-cli:25.0 cuilan/docker-cli:25 cuilan/docker-cli:latest
+
+#--------------------------- docker in docker ------------------------------
+
+build-dind-19:
+    DO ../udcs/image+DOCKER_DIND_19
+    DO ../udcs+LABEL
+    DO +DOCKER_ALPINE_PKG
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE --push cuilan/dind:19.03.15-alpine3.13 cuilan/dind:19.03.15 cuilan/dind:19.03 cuilan/dind:19
+
+build-dind-24:
+    DO ../udcs/image+DOCKER_DIND_24
+    DO ../udcs+LABEL
+    DO +DOCKER_ALPINE_PKG
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE --push cuilan/dind:24.0.8-alpine3.19 cuilan/dind:24.0.8 cuilan/dind:24.0 cuilan/dind:24
+
+build-dind-25:
+    DO ../udcs/image+DOCKER_DIND_25
+    DO ../udcs+LABEL
+    DO +DOCKER_ALPINE_PKG
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE --push cuilan/dind:25.0.1-alpine3.19 cuilan/dind:25.0.1 cuilan/dind:25.0 cuilan/dind:25
+
+all:
+    BUILD --platform=linux/amd64 +build-docker-cli-19
+    # BUILD --platform=linux/amd64 +build-docker-cli-24
+    # BUILD --platform=linux/amd64 +build-docker-cli-25
+
+    BUILD --platform=linux/amd64 +build-dind-19
+    # BUILD --platform=linux/amd64 +build-dind-24
+    # BUILD --platform=linux/amd64 +build-dind-25
+
+    # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-docker-cli-19
+    # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-docker-cli-24
+    # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-docker-cli-25
+
+    # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-dind-19
+    # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-dind-24
+    # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-dind-25
