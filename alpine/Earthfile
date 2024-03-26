@@ -5,6 +5,7 @@ build-3.19:
     DO ../udcs+LABEL
     DO ../udcs/os/alpine+UPGRADE_ALIYUN
     DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
 
     CMD ["/bin/bash"]
 
@@ -16,6 +17,7 @@ build-3.18:
     DO ../udcs+LABEL
     DO ../udcs/os/alpine+UPGRADE_ALIYUN
     DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
 
     CMD ["/bin/bash"]
 
@@ -27,6 +29,7 @@ build-3.19-ssh:
     DO ../udcs+LABEL
     DO ../udcs/os/alpine+UPGRADE_ALIYUN
     DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/os/alpine+SSH_PKG
 
     CMD ["/bin/bash"]
