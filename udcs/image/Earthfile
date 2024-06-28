@@ -10,6 +10,7 @@ ALPINE3_19:
     FROM alpine:3.19
 
 ALPINE3_18:
+    FUNCTION
     COMMAND
     FROM alpine:3.18
 
