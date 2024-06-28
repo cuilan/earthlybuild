@@ -1,7 +1,7 @@
 VERSION 0.8
 
 TIMEZONE:
-    COMMAND
+    FUNCTION
     ENV TZ Asia/Shanghai
 
     RUN yum -y install tzdata \
@@ -11,7 +11,7 @@ TIMEZONE:
         && rm -rf /var/cache/yum /var/tmp/yum-*
 
 UPGRADE:
-    COMMAND
+    FUNCTION
         RUN set -ex \
         && sed -e 's|^mirrorlist=|#mirrorlist=|g' \
             -e 's|^#baseurl=http://mirror.centos.org|baseurl=https://mirrors.tuna.tsinghua.edu.cn|g' \
@@ -28,7 +28,7 @@ UPGRADE:
         && rm -rf /var/cache/yum /var/tmp/yum-*
 
 REMOVE_UNUSED_PKG:
-    COMMAND
+    FUNCTION
     RUN yum -y remove mysql MySQL-python perl-DBD-MySQL libnuma.so.1 dovecot exim qt-MySQL perl-DBD-MySQL \
             dovecot qt-MySQL mysql-server mysql-connector-odbc php-mysql mysql-bench libdbi-dbd-mysql \
             mysql-devel-5.0.77-3.el5 httpd php mod_auth_mysql mailman squirrelmail \
@@ -37,7 +37,7 @@ REMOVE_UNUSED_PKG:
         && rm -rf /var/cache/yum /var/tmp/yum-*
 
 COMMON_PKG:
-    COMMAND
+    FUNCTION
     RUN yum makecache \
         && yum groupinstall  "Development Tools" -y \
         && yum -y install htop pstree cmake mesa-libGL.x86_64 net-tools.x86_64 git wget screen iotop vim \

@@ -1,7 +1,7 @@
 VERSION 0.8
 
 ALPINE:
-    COMMAND
+    FUNCTION
     FROM alpine
 
 ALPINE3_19:
@@ -15,151 +15,151 @@ ALPINE3_18:
 # -------------------------------------
 
 CENTOS7:
-    COMMAND
+    FUNCTION
     FROM centos:centos7
 
 # -------------------------------------
 
 DEBIAN:
-    COMMAND
+    FUNCTION
     FROM debian
 
 DEBIAN_SLIM:
-    COMMAND
+    FUNCTION
     FROM debian:stable-slim
 
 # -------------------------------------
 
 UBUNTU:
-    COMMAND
+    FUNCTION
     FROM ubuntu
 
 # -------------------------------------
 
 DOCKER_CLI_19:
-    COMMAND
+    FUNCTION
     FROM docker:19.03.15-alpine3.13
 
 DOCKER_CLI_24:
-    COMMAND
+    FUNCTION
     FROM docker:24.0.8-cli-alpine3.19
 
 DOCKER_CLI_25:
-    COMMAND
+    FUNCTION
     FROM docker:25.0.1-cli-alpine3.19
 
 DOCKER_DIND_19:
-    COMMAND
+    FUNCTION
     FROM docker:19.03.15-dind-alpine3.13
 
 DOCKER_DIND_24:
-    COMMAND
+    FUNCTION
     FROM docker:24.0.8-dind-alpine3.19
 
 DOCKER_DIND_25:
-    COMMAND
+    FUNCTION
     FROM docker:25.0.1-dind-alpine3.19
 
 # -------------------------------------
 
 GOLANG1_21:
-    COMMAND
+    FUNCTION
     FROM golang:1.21-alpine3.18
 
 GOLANG1_21_DEBIAN:
-    COMMAND
+    FUNCTION
     FROM golang:1.21.4-bullseye
 
 GOLANG1_21_3:
-    COMMAND
+    FUNCTION
     FROM golang:1.21.3-alpine
 
 GO:
-    COMMAND
+    FUNCTION
     DO +GOLANG1_21
 
 GO_DEBIAN:
-    COMMAND
+    FUNCTION
     DO +GOLANG1_21_DEBIAN
 
 # -------------------------------------
 
 RUST:
-    COMMAND
+    FUNCTION
     FROM rust:alpine
 
 RUST_DEFIAN:
-    COMMAND
+    FUNCTION
     FROM rust
 
 # -------------------------------------
 
 JDK8:
-    COMMAND
+    FUNCTION
     FROM eclipse-temurin:8-jdk
 
 JRE8:
-    COMMAND
+    FUNCTION
     FROM eclipse-temurin:8-jre
 
 JDK8_OPENJ9:
-    COMMAND
+    FUNCTION
     FROM ibm-semeru-runtimes:open-8-jdk
 
 JRE8_OPENJ9:
-    COMMAND
+    FUNCTION
     FROM ibm-semeru-runtimes:open-8-jre
 
 JDK11:
-    COMMAND
+    FUNCTION
     FROM eclipse-temurin:11-jdk
 
 JRE11:
-    COMMAND
+    FUNCTION
     FROM eclipse-temurin:11-jre
 
 JDK11_OPENJ9:
-    COMMAND
+    FUNCTION
     FROM ibm-semeru-runtimes:open-11-jdk
 
 JRE11_OPENJ9:
-    COMMAND
+    FUNCTION
     FROM ibm-semeru-runtimes:open-11-jre
 
 JDK17:
-    COMMAND
+    FUNCTION
     FROM eclipse-temurin:17-jdk
 
 JRE17:
-    COMMAND
+    FUNCTION
     FROM eclipse-temurin:17-jre
 
 JDK17_OPENJ9:
-    COMMAND
+    FUNCTION
     FROM ibm-semeru-runtimes:open-17-jdk
 
 JRE17_OPENJ9:
-    COMMAND
+    FUNCTION
     FROM ibm-semeru-runtimes:open-17-jre
 
 # -------------------------------------
 
 NODE:
-    COMMAND
+    FUNCTION
     FROM node:lts-buster
 
 # -------------------------------------
 
 NGINX:
-    COMMAND
+    FUNCTION
     FROM nginx:alpine
 
 # -------------------------------------
 
 CONFLUENCE:
-    COMMAND
+    FUNCTION
     FROM atlassian/confluence-server:7-ubuntu
 
 JIRA:
-    COMMAND
+    FUNCTION
     FROM atlassian/jira-software:8.13
