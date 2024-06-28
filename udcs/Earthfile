@@ -1,14 +1,14 @@
 VERSION 0.8
 
 LABEL:
-    COMMAND
+    FUNCTION
     LABEL maintainer="cuilan <17746598041@163.com>"
     LABEL repository="https://github.com/cuilan/earthlybuild"
     LABEL description="Earthly Build"
     LABEL licenses="Apache-2.0"
 
 BUILD_DATE:
-    COMMAND
+    FUNCTION
     FROM cuilan/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
