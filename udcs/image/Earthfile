@@ -5,6 +5,7 @@ ALPINE:
     FROM alpine
 
 ALPINE3_19:
+    FUNCTION
     COMMAND
     FROM alpine:3.19
 
