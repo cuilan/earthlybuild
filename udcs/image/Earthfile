@@ -4,6 +4,10 @@ ALPINE:
     FUNCTION
     FROM alpine
 
+ALPINE3_20:
+    FUNCTION
+    FROM alpine:3.20
+
 ALPINE3_19:
     FUNCTION
     FROM alpine:3.19

@@ -1,5 +1,16 @@
 VERSION 0.8
 
+build-3.20:
+    DO ../udcs/image+ALPINE3_20
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE_ALIYUN
+    DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE --push cuilan/alpine:latest cuilan/alpine:3.20
+
 build-3.19:
     DO ../udcs/image+ALPINE3_19
     DO ../udcs+LABEL
@@ -9,8 +20,7 @@ build-3.19:
 
     CMD ["/bin/bash"]
 
-    SAVE IMAGE --push cuilan/alpine:latest cuilan/alpine:3.19
-    # SAVE IMAGE cuilan/alpine:latest
+    SAVE IMAGE --push cuilan/alpine:3.19
 
 build-3.18:
     DO ../udcs/image+ALPINE3_18
@@ -22,7 +32,6 @@ build-3.18:
     CMD ["/bin/bash"]
 
     SAVE IMAGE --push cuilan/alpine:3.18
-    # SAVE IMAGE cuilan/alpine:latest
 
 build-3.19-ssh:
     DO ../udcs/image+ALPINE3_19
@@ -37,11 +46,13 @@ build-3.19-ssh:
     SAVE IMAGE --push cuilan/alpine:3.19-ssh
 
 all:
+    BUILD --platform=linux/amd64 +build-3.20
     BUILD --platform=linux/amd64 +build-3.19
     BUILD --platform=linux/amd64 +build-3.18
 
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-3.20
     BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-3.19
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-3.18
 
-    BUILD --platform=linux/amd64 +build-3.19-ssh
+    # BUILD --platform=linux/amd64 +build-3.19-ssh
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-3.19-ssh
