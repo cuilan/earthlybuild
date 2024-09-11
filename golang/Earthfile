@@ -36,7 +36,7 @@ build-golang1.23.1-alpine3.20:
     DO ../udcs/os/alpine+COMMON_PKG
 
     ARG --required BUILD_DATE
-    SAVE IMAGE --push cuilan/golang:latest cuilan/golang:1.23.1-alpine cuilan/golang:1.23.1-alpine3.20 cuilan/golang:1.21.3-alpine-${BUILD_DATE}
+    SAVE IMAGE --push cuilan/golang:latest cuilan/golang:1.23.1-alpine cuilan/golang:1.21.3-alpine-${BUILD_DATE}
 
 all:
     FROM cuilan/alpine
