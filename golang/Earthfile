@@ -3,7 +3,7 @@ VERSION 0.8
 DO ../udcs+BUILD_DATE
 
 GOLANG:
-    COMMAND
+    FUNCTION
     DO ../udcs+LABEL
     DO ../udcs/language/go+GOPROXY
     DO ../udcs/language/go+FIX_DNS
