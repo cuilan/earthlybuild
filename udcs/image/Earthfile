@@ -72,7 +72,7 @@ DOCKER_DIND_25:
 
 GOLANG1_23_1:
     FUNCTION
-    FROM 1.23.1-alpine3.20
+    FROM golang:1.23.1-alpine3.20
 
 GOLANG1_21:
     FUNCTION
