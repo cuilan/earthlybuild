@@ -4,6 +4,10 @@ ALPINE:
     FUNCTION
     FROM alpine
 
+ALPINE3_20_3:
+    FUNCTION
+    FROM alpine:3.20.3
+
 ALPINE3_20:
     FUNCTION
     FROM alpine:3.20
@@ -65,6 +69,10 @@ DOCKER_DIND_25:
     FROM docker:25.0.1-dind-alpine3.19
 
 # -------------------------------------
+
+GOLANG1_23_1:
+    FUNCTION
+    FROM 1.23.1-alpine3.20
 
 GOLANG1_21:
     FUNCTION
