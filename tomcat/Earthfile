@@ -1,0 +1,28 @@
+VERSION 0.8
+
+DO ../udcs+BUILD_DATE
+
+TOMCAT:
+    COMMAND
+    DO ../udcs+LABEL
+    DO ../udcs/os/debian+UPGRADE
+    DO ../udcs/os/debian+COMMON_PKG
+    DO ../udcs/os/debian+LOCALE
+    DO ../udcs/os/debian+TIMEZONE
+    DO ../udcs+TINI
+
+    ENTRYPOINT ["tini","--"]
+
+    CMD ["catalina.sh" "run"]
+
+############################# runtime ##############################
+
+build-tomcat9.0.97-jre17:
+    DO ../udcs/image+TOMCAT8_JRE17
+    DO +TOMCAT
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/tomcat:latest cuilan/tomcat:9-jre17 cuilan/tomcat:9.0.97-jre17 cuilan/tomcat:9.0.97-jre17-${BUILD_DATE}
+
+  
