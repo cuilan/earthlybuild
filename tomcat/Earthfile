@@ -3,7 +3,7 @@ VERSION 0.8
 DO ../udcs+BUILD_DATE
 
 TOMCAT:
-    COMMAND
+    FUNCTION
     DO ../udcs+LABEL
     DO ../udcs/os/debian+UPGRADE
     DO ../udcs/os/debian+COMMON_PKG
