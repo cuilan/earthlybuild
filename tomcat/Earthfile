@@ -9,16 +9,15 @@ TOMCAT:
     DO ../udcs/os/debian+COMMON_PKG
     DO ../udcs/os/debian+LOCALE
     DO ../udcs/os/debian+TIMEZONE
-    DO ../udcs+TINI
 
-    ENTRYPOINT ["tini","--"]
+    ENTRYPOINT []
 
     CMD ["catalina.sh" "run"]
 
 ############################# runtime ##############################
 
 build-tomcat9.0.97-jre17:
-    DO ../udcs/image+TOMCAT8_JRE17
+    DO ../udcs/image+TOMCAT9_JRE17
     DO +TOMCAT
 
     ARG --required BUILD_DATE

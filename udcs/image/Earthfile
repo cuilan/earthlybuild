@@ -156,7 +156,7 @@ JRE17_OPENJ9:
 
 # -------------------------------------
 
-TOMCAT8_JRE17:
+TOMCAT9_JRE17:
     FUNCTION
     FROM tomcat:9.0.97-jre17-temurin-noble
 
