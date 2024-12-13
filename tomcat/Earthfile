@@ -2,7 +2,7 @@ VERSION 0.8
 
 DO ../udcs+BUILD_DATE
 
-TOMCAT:
+DEBIAN_PKG:
     FUNCTION
     DO ../udcs+LABEL
     DO ../udcs/os/debian+UPGRADE
@@ -10,14 +10,25 @@ TOMCAT:
     DO ../udcs/os/debian+LOCALE
     DO ../udcs/os/debian+TIMEZONE
 
+TOMCAT:
+    FUNCTION
+    ENV CATALINA_HOME /usr/local/tomcat
+    ENV PATH $CATALINA_HOME/bin:$PATH
+    ENV TOMCAT_NATIVE_LIBDIR $CATALINA_HOME/native-jni-lib
+    ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$TOMCAT_NATIVE_LIBDIR
+    WORKDIR $CATALINA_HOME
+
+    EXPOSE 8080
+
     ENTRYPOINT []
 
-    CMD ["catalina.sh" "run"]
+    CMD ["catalina.sh", "run"]
 
 ############################# runtime ##############################
 
 build-tomcat9.0.97-jre17:
     DO ../udcs/image+TOMCAT9_JRE17
+    DO +DEBIAN_PKG
     DO +TOMCAT
 
     ARG --required BUILD_DATE
