@@ -10,6 +10,15 @@ DOCKER_ALPINE_PKG:
         && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
         && echo ${TZ} > /etc/timezone
 
+KUBECTL_PKG:
+    FUNCTION
+    # $(curl -L -s https://dl.k8s.io/release/stable.txt)
+    ENV KUBE_VERSION v1.32.0
+    ENV KUBECTL_DOWNLOAD_URL https://dl.k8s.io/release/${KUBE_VERSION}/bin/linux/amd64/kubectl
+
+    RUN wget -q ${KUBECTL_DOWNLOAD_URL} -O /usr/bin/kubectl \
+        && chmod +x /usr/bin/kubectl \
+
 #--------------------------- docker cli ------------------------------
 
 build-docker-cli-19:
@@ -86,23 +95,39 @@ build-dind-27:
 
     SAVE IMAGE --push cuilan/dind:27.5.0-alpine3.21 cuilan/dind:27.5.0 cuilan/dind:27.5 cuilan/dind:27 cuilan/dind:latest
 
+#--------------------------- docker-kubectl ------------------------------
+
+build-docker-kubectl-27:
+    DO ../udcs/image+DOCKER_DIND_27
+    DO ../udcs+LABEL
+    DO +DOCKER_ALPINE_PKG
+    DO +KUBECTL_PKG
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE --push cuilan/docker-kubectl:27.5.0-alpine3.21 cuilan/docker-kubectl:27.5.0 cuilan/docker-kubectl:27.5 cuilan/docker-kubectl:27 cuilan/docker-kubectl:latest
+
 all:
+    # docker-cli
     # BUILD --platform=linux/amd64 +build-docker-cli-19
     # BUILD --platform=linux/amd64 +build-docker-cli-24
     # BUILD --platform=linux/amd64 +build-docker-cli-25
     BUILD --platform=linux/amd64 +build-docker-cli-27
-
-    # BUILD --platform=linux/amd64 +build-dind-19
-    # BUILD --platform=linux/amd64 +build-dind-24
-    # BUILD --platform=linux/amd64 +build-dind-25
-    BUILD --platform=linux/amd64 +build-dind-27
-
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-docker-cli-19
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-docker-cli-24
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-docker-cli-25
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-docker-cli-27
 
+    # docker in docker
+    # BUILD --platform=linux/amd64 +build-dind-19
+    # BUILD --platform=linux/amd64 +build-dind-24
+    # BUILD --platform=linux/amd64 +build-dind-25
+    BUILD --platform=linux/amd64 +build-dind-27
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-dind-19
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-dind-24
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-dind-25
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-dind-27
+
+    # docker-kubectl
+    BUILD --platform=linux/amd64 +build-docker-kubectl-27
+    # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-docker-kubectl-27
