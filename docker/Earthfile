@@ -17,7 +17,7 @@ KUBECTL_PKG:
     ENV KUBECTL_DOWNLOAD_URL https://dl.k8s.io/release/${KUBE_VERSION}/bin/linux/amd64/kubectl
 
     RUN wget -q ${KUBECTL_DOWNLOAD_URL} -O /usr/bin/kubectl \
-        && chmod +x /usr/bin/kubectl \
+        && chmod +x /usr/bin/kubectl
 
 #--------------------------- docker cli ------------------------------
 
