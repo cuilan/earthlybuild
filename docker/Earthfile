@@ -112,7 +112,7 @@ all:
     # BUILD --platform=linux/amd64 +build-docker-cli-19
     # BUILD --platform=linux/amd64 +build-docker-cli-24
     # BUILD --platform=linux/amd64 +build-docker-cli-25
-    BUILD --platform=linux/amd64 +build-docker-cli-27
+    #BUILD --platform=linux/amd64 +build-docker-cli-27
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-docker-cli-19
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-docker-cli-24
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-docker-cli-25
@@ -122,7 +122,7 @@ all:
     # BUILD --platform=linux/amd64 +build-dind-19
     # BUILD --platform=linux/amd64 +build-dind-24
     # BUILD --platform=linux/amd64 +build-dind-25
-    BUILD --platform=linux/amd64 +build-dind-27
+    #BUILD --platform=linux/amd64 +build-dind-27
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-dind-19
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-dind-24
     # BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-dind-25
