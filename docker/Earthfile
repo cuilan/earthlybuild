@@ -1,7 +1,7 @@
 VERSION 0.8
 
 DOCKER_ALPINE_PKG:
-    COMMAND
+    FUNCTION
     ENV TZ Asia/Shanghai
     
     RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
