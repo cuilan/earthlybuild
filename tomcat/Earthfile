@@ -24,6 +24,16 @@ TOMCAT:
 
     CMD ["catalina.sh", "run"]
 
+GDAL:
+    FUNCTION
+    RUN wget -q https://github.com/OSGeo/gdal/releases/download/v3.8.4/gdal-3.8.4.tar.gz \
+        && tar zxf gdal-3.8.4.tar.gz \
+        && cd gdal-3.8.4 \
+        && ./configure && )  \
+        && ./configure && make -j4 && make install \
+        && echo 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH' >> /root/.bashrc \
+        && rm -rf gdal-3.8.4.tar.gz gdal-3.8.4
+
 ############################# runtime ##############################
 
 build-tomcat9.0.97-jre17:
@@ -35,9 +45,20 @@ build-tomcat9.0.97-jre17:
 
     SAVE IMAGE --push cuilan/tomcat:latest cuilan/tomcat:9-jre17 cuilan/tomcat:9.0.97-jre17 cuilan/tomcat:9.0.97-jre17-${BUILD_DATE}
 
+build-tomcat9-gdal:
+    DO ../udcs/image+TOMCAT9_JRE17
+    DO +DEBIAN_PKG
+    DO +GDAL
+    DO +TOMCAT
+
+    ARG --required BUILD_DATE
+
+    SAVE IMAGE --push cuilan/tomcat-gdal:latest cuilan/tomcat:9-gdal cuilan/tomcat:9.0.97-gdal-${BUILD_DATE}
+
 all:
     FROM cuilan/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 
     BUILD --platform=linux/amd64 +build-tomcat9.0.97-jre17 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-tomcat9-gdal --BUILD_DATE=${BUILD_DATE}
