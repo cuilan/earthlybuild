@@ -26,13 +26,12 @@ TOMCAT:
 
 GDAL:
     FUNCTION
-    RUN wget -q https://github.com/OSGeo/gdal/releases/download/v3.8.4/gdal-3.8.4.tar.gz \
-        && tar zxf gdal-3.8.4.tar.gz \
-        && cd gdal-3.8.4 \
-        && ./configure && )  \
+    RUN wget -q https://github.com/OSGeo/gdal/releases/download/v3.2.0/gdal-3.2.0.tar.gz \
+        && tar zxf gdal-3.2.0.tar.gz \
+        && cd gdal-3.2.0 \
         && ./configure && make -j4 && make install \
         && echo 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH' >> /root/.bashrc \
-        && rm -rf gdal-3.8.4.tar.gz gdal-3.8.4
+        && rm -rf gdal-3.2.0.tar.gz gdal-3.2.0
 
 ############################# runtime ##############################
 
@@ -53,7 +52,7 @@ build-tomcat9-gdal:
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push cuilan/tomcat-gdal:latest cuilan/tomcat:9-gdal cuilan/tomcat:9.0.97-gdal-${BUILD_DATE}
+    SAVE IMAGE --push cuilan/tomcat:9-gdal cuilan/tomcat:9-gdal3.2.0 cuilan/tomcat:9-gdal3.2.0-${BUILD_DATE}
 
 all:
     FROM cuilan/alpine
