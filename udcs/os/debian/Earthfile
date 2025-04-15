@@ -25,6 +25,12 @@ COMMON_PKG:
         && apt install tzdata ca-certificates wget curl nload iftop htop unzip procps dnsutils iputils-ping git jq -y \
         && rm -rf /var/lib/apt/lists/*
 
+COMMON_GCC_PKG:
+    FUNCTION
+    RUN apt update \
+        && apt install tzdata ca-certificates wget curl nload iftop htop unzip procps dnsutils iputils-ping git jq gcc make -y \
+        && rm -rf /var/lib/apt/lists/*
+
 LOCALE:
     FUNCTION
     ENV LANG en_US.UTF-8

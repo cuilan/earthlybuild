@@ -6,7 +6,7 @@ DEBIAN_PKG:
     FUNCTION
     DO ../udcs+LABEL
     DO ../udcs/os/debian+UPGRADE
-    DO ../udcs/os/debian+COMMON_PKG
+    DO ../udcs/os/debian+COMMON_GCC_PKG
     DO ../udcs/os/debian+LOCALE
     DO ../udcs/os/debian+TIMEZONE
 
