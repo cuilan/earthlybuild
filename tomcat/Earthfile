@@ -67,4 +67,4 @@ all:
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 
     BUILD --platform=linux/amd64 +build-tomcat9.0.97-jre17 --BUILD_DATE=${BUILD_DATE}
-    BUILD --platform=linux/amd64 +build-tomcat9-gdal --BUILD_DATE=${BUILD_DATE}
+    #BUILD --platform=linux/amd64 +build-tomcat9-gdal --BUILD_DATE=${BUILD_DATE}
