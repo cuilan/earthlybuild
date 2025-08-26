@@ -78,6 +78,22 @@ DOCKER_DIND_27:
 
 # -------------------------------------
 
+GOLANG1_25:
+    FUNCTION
+    FROM golang:1.25-alpine3.22
+
+GOLANG1_25_DEBIAN:
+    FUNCTION
+    FROM golang:1.25-bookworm
+
+GOLANG1_24:
+    FUNCTION
+    FROM golang:1.24-alpine⁠3.22
+    
+GOLANG1_24_DEBIAN:
+    FUNCTION
+    FROM golang:1.24-bookworm⁠
+
 GOLANG1_23_1:
     FUNCTION
     FROM golang:1.23.1-alpine3.20
